@@ -8,8 +8,7 @@ var renderer=null,
   material=null,
   texture=null,
   picture=null,
-  amount=0.0,
-  needsToUpdate=false,
+  amount=null,
 
   $canvas=null,
   $input=null,
@@ -104,18 +103,17 @@ function initScene(){
   picture=mesh;
   amount=material.uniforms.amount;
 
-  //needsToUpdate=true;
 
 }
 
 function onUpdate(){
-  //if(!needsToUpdate) return;
+
   //console.log( amount);
   renderer.render(scene,camera);
 
   requestAnimationFrame(onUpdate);
 
-  //needsToUpdate=false;
+
 }
 
 
@@ -132,8 +130,6 @@ function onResize(evt){
   camera.top=winH/2;
   camera.bottom=-winH/2;
   camera.updateProjectionMatrix();
-
-  //needsToUpdate=true;
 
 }
 
@@ -156,8 +152,6 @@ function onChange(evt){
     $slider.val(amount.value);
   }
 
-
-  //needsToUpdate=true;
 }
 
 function onFileChange(evt){
@@ -182,8 +176,6 @@ function onFileChange(evt){
         geometry.vertices[3].set(im.width/2,-im.height/2,0);
         geometry.verticesNeedUpdate=true;
 
-        //needsToUpdate=true;
-
     };
 
     reader.readAsDataURL(input.files[0]);
@@ -198,7 +190,6 @@ function onImgLoaded(evt){
     $(evt.target).off("load",onImgLoaded);
     //console.log(evt);
     //texture.needsUpdate=true;
-
   //}
     
 }
